@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="Booking.css">
+</head>
+<body>
+  <section class="hero">
+  <div class="hero-bg"></div>
+  <div class="ornament ornament-tl"></div>
+  <div class="ornament ornament-tr"></div>
+  <div class="ornament ornament-bl"></div>
+  <div class="ornament ornament-br"></div>
+ 
+  <p class="hero-label">Est. 1923 &nbsp;·&nbsp; Since a Century of Excellence</p>
+  <h1 class="hero-title">The Grand<br><em>Reserve</em></h1>
+  <div class="hero-divider">
+    <span></span>
+    <i>✦</i>
+    <span></span>
+  </div>
+  <p class="hero-sub">Where Luxury Becomes Legend</p>
+ 
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Discover
+  </div>
+</section>
+ 
+<!-- ─── BOOKING STRIP ─── -->
+<div class="booking-strip">
+  <div class="booking-form">
+    <div class="form-field" onclick="document.getElementById('dest').focus()">
+      <div class="field-label">Destination</div>
+      <div class="field-value" id="dest-display">New York, United States</div>
+      <input type="text" id="dest" value="New York, United States" oninput="document.getElementById('dest-display').textContent=this.value||'Select destination'">
+    </div>
+ 
+    <div class="form-field" onclick="document.getElementById('checkin').focus()">
+      <div class="field-label">Check In</div>
+      <div class="field-value" id="checkin-display">21 Feb 2026</div>
+      <input type="date" id="checkin" value="2026-02-21" onchange="formatDate('checkin')">
+    </div>
+ 
+    <div class="form-field" onclick="document.getElementById('checkout').focus()">
+      <div class="field-label">Check Out</div>
+      <div class="field-value" id="checkout-display">26 Feb 2026</div>
+      <input type="date" id="checkout" value="2026-02-26" onchange="formatDate('checkout')">
+    </div>
+ 
+    <div class="form-field" onclick="document.getElementById('guests-sel').focus()">
+      <div class="field-label">Guests</div>
+      <div class="field-value" id="guests-display">2 Adults · 1 Child</div>
+      <select id="guests-sel" onchange="updateGuests(this)">
+        <option value="1 Adult">1 Adult</option>
+        <option value="2 Adults">2 Adults</option>
+        <option value="2 Adults · 1 Child" selected>2 Adults · 1 Child</option>
+        <option value="2 Adults · 2 Children">2 Adults · 2 Children</option>
+        <option value="3 Adults">3 Adults</option>
+        <option value="4 Adults">4 Adults</option>
+      </select>
+    </div>
+ 
+    <button class="search-btn" onclick="animateSearch(this)">
+      Search Rooms
+    </button>
+  </div>
+</div>
+ 
+<!-- ─── ROOMS SECTION ─── -->
+<section class="rooms-section">
+  <div class="section-header">
+    <p class="section-tag">Our Accommodations</p>
+    <h2 class="section-title">Curated <em>Sanctuaries</em></h2>
+  </div>
+ 
+  <div class="filter-bar">
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="setFilter(this)">All Rooms</button>
+      <button class="filter-tab" onclick="setFilter(this)">Standard</button>
+      <button class="filter-tab" onclick="setFilter(this)">Deluxe</button>
+      <button class="filter-tab" onclick="setFilter(this)">Suite</button>
+      <button class="filter-tab" onclick="setFilter(this)">Penthouse</button>
+    </div>
+    <select class="sort-select">
+      <option>Sort: Featured</option>
+      <option>Price: Low to High</option>
+      <option>Price: High to Low</option>
+      <option>Rating</option>
+    </select>
+  </div>
+ 
+  <div class="rooms-grid">
+ 
+    <!-- Room 1 -->
+    <div class="room-card">
+      <div class="room-image">
+        <span class="avail-badge urgent">⚡ 3 Rooms Left</span>
+        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80" alt="General Room" loading="lazy">
+        <div class="room-image-overlay"></div>
+      </div>
+      <div class="room-body">
+        <div>
+          <p class="room-category">Standard Collection</p>
+          <h3 class="room-name">General Room</h3>
+          <p class="room-desc">A refined retreat featuring bespoke furnishings, Egyptian cotton linens, and a curated minibar. Floor-to-ceiling windows frame panoramic city views.</p>
+          <div class="room-specs">
+            <div class="spec-item"><div class="spec-icon">👥</div>2 Adults, 2 Children</div>
+            <div class="spec-item"><div class="spec-icon">📐</div>38 m²</div>
+            <div class="spec-item"><div class="spec-icon">🛏</div>King Bed</div>
+          </div>
+          <div class="room-amenities">
+            <span class="amenity-tag">Free WiFi</span>
+            <span class="amenity-tag">Mini Bar</span>
+            <span class="amenity-tag">City View</span>
+            <span class="amenity-tag">Air Con</span>
+          </div>
+        </div>
+        <div class="room-rating">
+          <span class="stars">★★★★☆</span>
+          <span class="rating-text">4.2 · 128 Reviews</span>
+        </div>
+      </div>
+      <div class="room-booking">
+        <div class="price-block">
+          <p class="price-from">From</p>
+          <div class="price-amount"><span>$</span>1,000</div>
+          <p class="price-per">Per Night</p>
+          <p class="price-strike">$1,200</p>
+        </div>
+        <div>
+          <div class="qty-row" style="margin-bottom:12px">
+            <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+            <div class="qty-num">1</div>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <button class="book-btn" onclick="openModal('General Room', 1000)">Book Now</button>
+          <p class="book-note">Free cancellation · 48h</p>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Room 2 -->
+    <div class="room-card">
+      <div class="room-image">
+        <span class="avail-badge available">✓ Available</span>
+        <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=600&q=80" alt="Deluxe Suite" loading="lazy">
+        <div class="room-image-overlay"></div>
+      </div>
+      <div class="room-body">
+        <div>
+          <p class="room-category">Deluxe Collection</p>
+          <h3 class="room-name">Deluxe Suite</h3>
+          <p class="room-desc">An expanded sanctuary with a separate living area, spa-inspired marble bathroom with soaking tub, and personalized concierge service around the clock.</p>
+          <div class="room-specs">
+            <div class="spec-item"><div class="spec-icon">👥</div>3 Adults, 1 Child</div>
+            <div class="spec-item"><div class="spec-icon">📐</div>65 m²</div>
+            <div class="spec-item"><div class="spec-icon">🛁</div>Soaking Tub</div>
+          </div>
+          <div class="room-amenities">
+            <span class="amenity-tag">Concierge</span>
+            <span class="amenity-tag">Jacuzzi</span>
+            <span class="amenity-tag">Lounge Access</span>
+            <span class="amenity-tag">Breakfast</span>
+          </div>
+        </div>
+        <div class="room-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-text">4.9 · 86 Reviews</span>
+        </div>
+      </div>
+      <div class="room-booking">
+        <div class="price-block">
+          <p class="price-from">From</p>
+          <div class="price-amount"><span>$</span>2,400</div>
+          <p class="price-per">Per Night</p>
+          <p class="price-strike">$2,800</p>
+        </div>
+        <div>
+          <div class="qty-row" style="margin-bottom:12px">
+            <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+            <div class="qty-num">1</div>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <button class="book-btn" onclick="openModal('Deluxe Suite', 2400)">Book Now</button>
+          <p class="book-note">Free cancellation · 48h</p>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Room 3 -->
+    <div class="room-card">
+      <div class="room-image">
+        <span class="avail-badge urgent">⚡ 1 Suite Left</span>
+        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=80" alt="Penthouse" loading="lazy">
+        <div class="room-image-overlay"></div>
+      </div>
+      <div class="room-body">
+        <div>
+          <p class="room-category">Penthouse</p>
+          <h3 class="room-name">Royal Penthouse</h3>
+          <p class="room-desc">The pinnacle of luxury — a private rooftop terrace, grand piano, personal butler, home theatre, and sweeping 360° skyline panoramas from the 42nd floor.</p>
+          <div class="room-specs">
+            <div class="spec-item"><div class="spec-icon">👥</div>6 Adults</div>
+            <div class="spec-item"><div class="spec-icon">📐</div>180 m²</div>
+            <div class="spec-item"><div class="spec-icon">🌃</div>360° View</div>
+          </div>
+          <div class="room-amenities">
+            <span class="amenity-tag">Butler</span>
+            <span class="amenity-tag">Private Terrace</span>
+            <span class="amenity-tag">Grand Piano</span>
+            <span class="amenity-tag">Home Theatre</span>
+          </div>
+        </div>
+        <div class="room-rating">
+          <span class="stars">★★★★★</span>
+          <span class="rating-text">5.0 · 22 Reviews</span>
+        </div>
+      </div>
+      <div class="room-booking">
+        <div class="price-block">
+          <p class="price-from">From</p>
+          <div class="price-amount"><span>$</span>8,500</div>
+          <p class="price-per">Per Night</p>
+        </div>
+        <div>
+          <div class="qty-row" style="margin-bottom:12px">
+            <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+            <div class="qty-num">1</div>
+            <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+          </div>
+          <button class="book-btn" onclick="openModal('Royal Penthouse', 8500)">Book Now</button>
+          <p class="book-note">Free cancellation · 72h</p>
+        </div>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">The Grand Reserve</div>
+  <p class="footer-text">© 2026 &nbsp;·&nbsp; All Rights Reserved &nbsp;·&nbsp; Luxury Redefined</p>
+</footer>
+ 
+<!-- ─── BOOKING MODAL ─── -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">×</button>
+    <p class="modal-tag">Complete Your Reservation</p>
+    <h2 class="modal-title" id="modal-room-name">General Room</h2>
+ 
+    <div class="modal-row">
+      <div class="modal-field">
+        <label>First Name</label>
+        <input type="text" placeholder="Alexandre">
+      </div>
+      <div class="modal-field">
+        <label>Last Name</label>
+        <input type="text" placeholder="Fontaine">
+      </div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-field">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com">
+      </div>
+      <div class="modal-field">
+        <label>Phone</label>
+        <input type="tel" placeholder="+1 (555) 000-0000">
+      </div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-field">
+        <label>Check In</label>
+        <input type="date" id="modal-checkin" value="2026-02-21">
+      </div>
+      <div class="modal-field">
+        <label>Check Out</label>
+        <input type="date" id="modal-checkout" value="2026-02-26">
+      </div>
+    </div>
+    <div class="modal-row">
+      <div class="modal-field">
+        <label>Guests</label>
+        <select>
+          <option>1 Adult</option>
+          <option selected>2 Adults</option>
+          <option>2 Adults · 1 Child</option>
+          <option>2 Adults · 2 Children</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label>Special Requests</label>
+        <input type="text" placeholder="e.g. high floor, late check-in">
+      </div>
+    </div>
+ 
+    <div class="modal-total">
+      <div>
+        <div class="modal-total-label">Estimated Total</div>
+        <div style="font-size:11px;color:rgba(245,240,232,0.3);margin-top:4px;letter-spacing:0.1em">5 nights · taxes incl.</div>
+      </div>
+      <div class="modal-total-amount" id="modal-total">$5,000</div>
+    </div>
+ 
+    <button class="modal-confirm-btn" onclick="confirmBooking()">Confirm &amp; Reserve</button>
+  </div>
+</div>
+<script>
+  function formatDate(id) {
+    const input = document.getElementById(id);
+    const display = document.getElementById(id + '-display');
+    const d = new Date(input.value + 'T00:00:00');
+    display.textContent = d.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+  }
+ 
+  function updateGuests(sel) {
+    document.getElementById('guests-display').textContent = sel.value;
+  }
+ 
+  function animateSearch(btn) {
+    const orig = btn.textContent;
+    btn.textContent = '✦  Searching…';
+    btn.style.letterSpacing = '0.5em';
+    setTimeout(() => {
+      btn.textContent = orig;
+      btn.style.letterSpacing = '';
+    }, 1800);
+  }
+ 
+  function changeQty(btn, delta) {
+    const numEl = btn.parentElement.querySelector('.qty-num');
+    let val = parseInt(numEl.textContent) + delta;
+    if (val < 1) val = 1;
+    if (val > 9) val = 9;
+    numEl.textContent = val;
+  }
+ 
+  function setFilter(btn) {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+  }
+ 
+  let currentPrice = 1000;
+ 
+  function openModal(roomName, price) {
+    currentPrice = price;
+    document.getElementById('modal-room-name').textContent = roomName;
+    updateTotal();
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+ 
+  function updateTotal() {
+    const ci = new Date(document.getElementById('modal-checkin').value + 'T00:00:00');
+    const co = new Date(document.getElementById('modal-checkout').value + 'T00:00:00');
+    const nights = Math.max(1, Math.round((co - ci) / 86400000));
+    const total = (currentPrice * nights).toLocaleString();
+    document.getElementById('modal-total').textContent = '$' + total;
+  }
+ 
+  document.getElementById('modal-checkin').addEventListener('change', updateTotal);
+  document.getElementById('modal-checkout').addEventListener('change', updateTotal);
+ 
+  function closeModal(e) {
+    if (e.target === document.getElementById('modal')) {
+      document.getElementById('modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+ 
+  function confirmBooking() {
+    const modal = document.getElementById('modal');
+    const btn = modal.querySelector('.modal-confirm-btn');
+    btn.textContent = '✦  Reservation Confirmed!';
+    btn.style.background = 'linear-gradient(135deg, #2d8a4e, #3db96a)';
+    btn.style.letterSpacing = '0.3em';
+    setTimeout(() => {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      btn.textContent = 'Confirm & Reserve';
+      btn.style.background = '';
+      btn.style.letterSpacing = '';
+    }, 2200);
+  }
+</script>
+</body>
+</html>
